@@ -75,4 +75,4 @@ volumes:
   redis-data:
   mailhog-data:
 
-# docker compose up kafka kafka-ui zookeeper
+# docker compose up kafka kafka-ui zookeeper -d

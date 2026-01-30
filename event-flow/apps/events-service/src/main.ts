@@ -1,10 +1,10 @@
 import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
-import { ValidationPipe } from '@nestjs/common';
+import { EventsServiceModule } from './events-service.module';
 import { SERVICE_PORTS } from '@app/common';
+import { ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(EventsServiceModule);
 
   app.useGlobalPipes(new ValidationPipe({
     whitelist: true,
@@ -12,6 +12,6 @@ async function bootstrap() {
     transform: true,
   }));
 
-  await app.listen(SERVICE_PORTS.API_GATEWAY);
+  await app.listen(SERVICE_PORTS.EVENTS_SERVICE);
 }
 bootstrap();
