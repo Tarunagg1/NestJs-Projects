@@ -1,6 +1,7 @@
 import { NestFactory } from '@nestjs/core'; import { Transport, MicroserviceOptions } from '@nestjs/microservices';
 import { Logger } from '@nestjs/common';
 import { MediaModule } from './media.module';
+import { applyToMicroServiceLayer } from 'app/rpc';
 
 async function bootstrap() {
   process.title = 'media-service';
@@ -19,6 +20,7 @@ async function bootstrap() {
     },
   });
 
+  applyToMicroServiceLayer(app);
   app.enableShutdownHooks();
   await app.listen();
 

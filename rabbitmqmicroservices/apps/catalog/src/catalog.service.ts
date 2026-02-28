@@ -5,7 +5,7 @@ export class CatalogService {
   ping() {
     return {
       status: 'ok',
-      servide: "catalog",
+      servide: "catalog_service",
       now: new Date()
     }
   }

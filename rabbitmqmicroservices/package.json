@@ -12,6 +12,11 @@
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/apps/learn-microservices/main",
+    "start:gateway": "nest start gateway --watch",
+    "start:catalog": "nest start catalog --watch",
+    "start:media": "nest start media --watch",
+    "start:search": "nest start search --watch",
+    "start:all": "concurrently \"npm run start:gateway\" \"npm run start:catalog\" \"npm run start:media\" \"npm run start:search\" --names \"GATEWAY,CATALOG,MEDIA,SEARCH\" --prefix-colors \"blue,green,yellow,magenta\"",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
     "test": "jest",
     "test:watch": "jest --watch",
@@ -20,12 +25,21 @@
     "test:e2e": "jest --config ./apps/learn-microservices/test/jest-e2e.json"
   },
   "dependencies": {
+    "@clerk/backend": "^2.30.1",
     "@nestjs/common": "^11.0.1",
+    "@nestjs/config": "^4.0.3",
     "@nestjs/core": "^11.0.1",
     "@nestjs/microservices": "^11.1.13",
+    "@nestjs/mongoose": "^11.0.4",
     "@nestjs/platform-express": "^11.0.1",
     "amqp-connection-manager": "^5.0.0",
     "amqplib": "^0.10.9",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.14.3",
+    "cloudinary": "^2.9.0",
+    "concurrently": "^9.1.2",
+    "mongoose": "^9.1.6",
+    "multer": "^2.1.0",
     "reflect-metadata": "^0.2.2",
     "rxjs": "^7.8.1"
   },
@@ -37,6 +51,7 @@
     "@nestjs/testing": "^11.0.1",
     "@types/express": "^5.0.0",
     "@types/jest": "^30.0.0",
+    "@types/multer": "^2.0.0",
     "@types/node": "^22.10.7",
     "@types/supertest": "^6.0.2",
     "eslint": "^9.18.0",
@@ -71,7 +86,11 @@
     "coverageDirectory": "./coverage",
     "testEnvironment": "node",
     "roots": [
-      "<rootDir>/apps/"
-    ]
+      "<rootDir>/apps/",
+      "<rootDir>/libs/"
+    ],
+    "moduleNameMapper": {
+      "^app/rpc(|/.*)$": "<rootDir>/libs/rpc/src/$1"
+    }
   }
 }
